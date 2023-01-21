@@ -1,11 +1,28 @@
-<!DOCTYPE html>
-<html lang="ja">
+<html>
+
 <head>
   <meta charset="utf-8">
-  <title>PHP Practice</title>
+  <title></title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body>
-  <p>Hello, PHP!</p>
-  <p>Thank You!</p>
+  <h1 class="text-3xl text-blue-500  mx-5">【22ch】</h1>
+  <br/>
+  <!-- action属性, method属性を指定 -->
+
+  <form action="22ch.php" method="get" class="w-full max-w-sm">
+    <!-- name属性を指定 -->
+
+    <label for="message" class="block mx-5 mb-2 text-sm font-medium text-gray-900 dark:text-white">コメントを追加</label>
+    <textarea name="message" rows="4" class="block mx-5 mb-5 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=""></textarea>
+    
+    <!-- <p>西暦<br /><input type="text" name="Num" value="2023">年</p> -->
+
+    <!-- name属性を指定 -->
+    <button class="bg-blue-600 hover:bg-blue-500 text-white rounded px-4 py-2 mx-5">
+      <p><input type="submit" name="submitBtn" value="投稿する"></p>
+    </button>
+
+  </form>
 </body>
-</html>
