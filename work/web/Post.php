@@ -10,23 +10,15 @@ class Post
     $this->setDatetime($dttm);
     $this->setPost($post);
   }
-
-  public function createNewPost($dttm, $post)
+  //   public function setPost($post) {
+  //     $date = new DateTime('now');
+  //     $this->dttm = $date->format('Y年m月d日 H時i分s秒');
+  //     $this->post = $post;
+  //   }
+  public function createNewPost($post)
   {
-    if (isset($_GET['message'])) {
-      $this->dttm = new DateTime('now');
-      // print_r($newDate);
-      // $jsonの配列に、新しいデータを追加
-      $post = $_GET['message'];
-      $this->post = $post;
-  }
-  }
-
-  public function setDatetime($dttm)
-  {
-   
-      $this->dttm = $dttm;
-    
+    $this->dttm = new DateTime('now');
+    $this->post = $post;
   }
 
   public function setPost($post)
@@ -34,6 +26,10 @@ class Post
     $this->post = $post;
   }
 
+  public function setDatetime($dttm)
+  {
+    $this->dttm = $dttm;
+  }
 
   public function getDatetime()
   {
@@ -45,8 +41,3 @@ class Post
     return $this->post;
   }
 }
-
-?>
-</body>
-
-</html>
