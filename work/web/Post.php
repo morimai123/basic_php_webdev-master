@@ -10,14 +10,11 @@ class Post
     $this->setDatetime($dttm);
     $this->setPost($post);
   }
-  //   public function setPost($post) {
-  //     $date = new DateTime('now');
-  //     $this->dttm = $date->format('Y年m月d日 H時i分s秒');
-  //     $this->post = $post;
-  //   }
+  
   public function createNewPost($post)
   {
     $this->dttm = new DateTime('now');
+    $this->dttm = $this->dttm->format('Y-m-d H:i');
     $this->post = $post;
   }
 
