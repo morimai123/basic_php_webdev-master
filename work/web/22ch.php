@@ -12,7 +12,6 @@
 
 <body>
     <?php
-    $newpost = $_GET["newpost"];
     require_once('Post.php');
 
     function readPostsFromJson()
@@ -20,23 +19,27 @@
         //jsonファイルを開く
         $data_file_name = "data.json";
         $data = file_get_contents($data_file_name);
+        // data.jsonを配列で読み込み
         $json = json_decode($data, true);
         return $json;
     }
+
     $posts = readPostsFromJson();
-    // $newPost = createNewPost($post);
+    // 画面から入力した値を変数に入れる
+    $newpost = $_GET["newpost"];
 
     if (isset($_GET["newpost"])) {
+        // 現在日時を取得
         $newdate = new DateTime('now');
         $newdate = $newdate->format('Y-m-d H:i');
+        // 入力された値と現在日時を配列に入れる
         $array["date"] = $newdate;
         $array["post"] = $newpost;
         array_push($posts, $array);
+        // 画面から入力した値をdata.jsonを配列で書き込み
         $newposts = json_encode($posts, JSON_UNESCAPED_UNICODE);
         file_put_contents("data.json", $newposts);
     }
-
-    //jsonファイルを$postに入れPostクラスをインスタンス化。引数で中身を渡す。
 
     foreach ($posts as $post) {
         $post = new Post($post['date'], $post['post']);
