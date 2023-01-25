@@ -2,8 +2,8 @@
 
 class Post
 {
-  private $post;
   private $dttm;
+  private $post;
 
   public function __construct($dttm, $post)
   {

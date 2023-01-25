@@ -16,6 +16,9 @@
 
     // jsonファイルからPostクラスの配列を取得する
     $posts = readPostsFromJson();
+    // print_r($posts);
+    // echo "<br/>";
+    // echo "<br/>";
 
     // 画面から入力した値を変数に入れる
     $newpost = $_GET["newpost"];
@@ -27,33 +30,47 @@
     // 入力された投稿と現在日時でPostクラスを作る
     $p = new Post($newdate, $newpost);
     array_push($posts, $p);
-    // print_r($posts);
-    // 新配列の要素を取り出す
+    print_r($posts);
+    echo "<br/>";
+    echo "<br/>";
+    $ary = array();
+    // print_r($ary);
     foreach ($posts as $i) {
-        // オブジェクトを配列化
-        $post = (array)$i;
-        // print_r($post);
-        $post2 = (array)$post;
-        print_r($post2);
-
+        echo "-----";
+        print_r($i);
+        echo "-----";
+        echo "<br/>";
+        // 入力された投稿と現在日時を含めた連想配列を作る
+        $ary2 = array('date' => $i->getDatetime(), 'post' => $i->getPost());
+        array_push($ary, $ary2);
     }
 
-    // keyを元に戻す方法が分からず(Postdttm、Postpost) 、、配列の中に配列を入れる方法も分からない、、    
-
+    // print_r($ary);
 
     // 画面から入力した値をdata.jsonを配列で書き込み
-    // $newposts = json_encode($posts, JSON_UNESCAPED_UNICODE);
-    // file_put_contents("data.json", $newposts);
+    $newjson = json_encode($ary, JSON_UNESCAPED_UNICODE);
+    file_put_contents("data.json", $newjson);
 
+    // $array[0]['date'] = '2023/01/24';
+    // $array[0]['post'] = '今日の投稿';
+    // $array[1]['ddate'] = '2023/01/23';
+    // $array[1]['post'] = '昨日の投稿';
+    // $array[2]['date'] = '2023/01/25';
+    // $array[2]['post'] = '明日の投稿';
+    // print_r($array);
+
+    // Postクラスのオブジェクトでは、json形式に変換できない
+    // $newjson = json_encode($posts);
+    // print_r($newjson);
 
     // それぞれの投稿を取り出す
-    foreach ($posts as $post) {
+    foreach ($posts as $post2) {
         // $post = new Post($post['date'], $post['post']);
         // $post->createNewPost($newpost);
         //Postクラスのget関数を使って表示
         echo "<div class ='card'>";
-        echo "<div class ='dttm'>" .  $post->getDatetime() . "</br></div>";
-        echo "<div class ='post'>" .  $post->getPost() . "</br></div>";
+        echo "<div class ='dttm'>" .  $post2->getDatetime() . "</br></div>";
+        echo "<div class ='post'>" .  $post2->getPost() . "</br></div>";
         echo "</div>";
     }
     // for ($i = 0; $i <= count($posts) - 1; $i++) {
@@ -71,9 +88,8 @@
         $data = file_get_contents($data_file_name);
         // data.jsonを配列で読み込み
         $json = json_decode($data, true);
-        print_r($json);
-        echo "<br/>";
-        echo "<br/>";
+        // print_r($json);
+
         $arr = array();
         foreach ($json as $j) {
             $post = new Post($j['date'], $j['post']);
